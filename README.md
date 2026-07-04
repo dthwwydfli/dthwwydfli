@@ -11,8 +11,7 @@ I build innovative web applications, generative UIs, and agentic systems at the 
 📍 London, UK | 📧 abdullahistiaq77@gmail.com | [LinkedIn](https://www.linkedin.com/in/istiaqabdullah/ )
 
 ## 🏆 Recent Achievements
-- **Winner** @ Google x CopilotKit Generative UI Hackathon (CityPulse)
-- **Winner** @ Tech: Europe AI Hackathon (LeadLoop)
+- **Winner** @ Z.ai x Cursor Hackathon (PreventinePath)
 
 ## 🛠️ Tech Stack
  
