@@ -11,7 +11,7 @@ I build innovative web applications, generative UIs, and agentic systems at the 
 📍 London, UK | 📧 abdullahistiaq77@gmail.com | [LinkedIn](https://www.linkedin.com/in/istiaqabdullah/ )
 
 ## 🏆 Recent Achievements
-- **Winner** @ Z.ai x Cursor Hackathon (PreventinePath)
+- **Winner** @ Z.ai x Cursor Hackathon (PreventivePath)
 
 ## 🛠️ Tech Stack
  
