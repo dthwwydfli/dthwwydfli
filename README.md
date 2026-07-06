@@ -1,31 +1,96 @@
-Readme · MD
-Copy
-
 # Hi there 👋 I'm Istiaq Abdullah
-
 
 **CS Student @ University of Westminster | 2x Hackathon Winner | Founder @ Entreel**
 
-I build innovative web applications, generative UIs, and agentic systems at the intersection of design, utility, and real-world impact.
+I build innovative web applications, generative UIs, and agentic systems at the intersection of design, utility, and real-world impact. I'm actively seeking junior roles where I can apply my skills and passion for technology.
 
-📍 London, UK | 📧 abdullahistiaq77@gmail.com | [LinkedIn](https://www.linkedin.com/in/istiaqabdullah/ )
+📍 London, UK | 📧 [abdullahistiaq77@gmail.com](mailto:abdullahistiaq77@gmail.com) | [LinkedIn](https://www.linkedin.com/in/istiaqabdullah/)
+
+---
 
 ## 🏆 Recent Achievements
+
 - **2x Winner** @ Z.ai x Cursor Hackathon (PreventivePath)
 
+---
+
 ## 🛠️ Tech Stack
- 
-![HTML](https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
-![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=black)
-![Tailwind](https://img.shields.io/badge/-Tailwind-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
-![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)
-![Java](https://img.shields.io/badge/-Java-007396?style=flat&logo=java&logoColor=white)
-![SASS](https://img.shields.io/badge/-SASS-CC6699?style=flat&logo=sass&logoColor=white)
-![Git](https://img.shields.io/badge/-Git-F05032?style=flat&logo=git&logoColor=white)
-![VS Code](https://img.shields.io/badge/-VS%20Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
+
+[![HTML](https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)[![CSS](https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)[![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)[![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)[![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)[![Tailwind CSS](https://img.shields.io/badge/-TailwindCSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)[![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)[![Java](https://img.shields.io/badge/-Java-007396?style=flat&logo=java&logoColor=white)](https://www.java.com/en/)[![SASS](https://img.shields.io/badge/-SASS-CC6699?style=flat&logo=sass&logoColor=white)](https://sass-lang.com/)[![Git](https://img.shields.io/badge/-Git-F05032?style=flat&logo=git&logoColor=white)](https://git-scm.com/)[![VS Code](https://img.shields.io/badge/-VSCode-007ACC?style=flat&logo=visualstudiocode&logoColor=white)](https://code.visualstudio.com/)
+
+---
+
+## 💡 Featured Projects
+
+| Project Name | Description | Tech Stack |
+| --- | --- | --- |
+| **FinanceTracker** | A web extension for finance tracking, aiming to provide users with constant reminders and help them justify their purchases. | TypeScript |
+| **PreventivePath** | (from Z.ai x Cursor Hackathon) | TypeScript |
+| **karpathy-method-claude** | A 3-layer AI coding framework: spec → verifier → environment for Claude Code, Cursor, and AI coding assistants. | TypeScript |
+
+---
+
+## 📊 GitHub Stats
+
+[![Istiaq Abdullah GitHub Stats](https://github-readme-stats.vercel.app/api?username=dthwwydfli&show_icons=true&theme=radical&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)[![GitHub Profile Trophies](https://github-profile-trophies.vercel.app/?username=dthwwydfli&theme=radical&no-frame=true)](https://github.com/ryo-ma/github-profile-trophy)
+
+---
+
+## 📈 Contribution Activity
+
+[![GitHub Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=dthwwydfli&theme=dark&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
+
+---
+
+## 🔥 GitHub Streak
+
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=dthwwydfli&theme=dark&hide_border=true)](https://git.io/streak-stats)
+
+---
+
+## 🐍 My GitHub Contributions (Snake Animation)
+
+![GitHub contribution grid snake animation](https://github.com/dthwwydfli/dthwwydfli/blob/output/github-contribution-grid-snake.svg)
+
+**Note:** To make the snake animation work, you will need to set up a GitHub Action in your `dthwwydfli` repository. Create a file named `.github/workflows/snake.yml` with the following content:
+
+```yaml
+name: Generate Snake
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # run every day at midnight
+  workflow_dispatch # allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Platane/snk@v3
+        id: snake-gif
+        with:
+          github_user_name: dthwwydfli
+          outputs:
+            - dist/github-contribution-grid-snake.svg
+            - dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+      - uses: crazy-max/ghaction-github-pages@v2.1.3
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+---
+
+## 💻 Most Used Languages
+
+[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=dthwwydfli&layout=compact&theme=radical&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)
+
+---
+
+*Generated by Manus AI*
  
 
 
