@@ -1,6 +1,6 @@
 # Hi there 👋 I'm Istiaq Abdullah
 
-**CS Student @ University of Westminster | 2x Hackathon Winner 
+CS Student @ University of Westminster | 2x Hackathon Winner 
 
 I build innovative web applications, generative UIs, and agentic systems at the intersection of design, utility, and real-world impact.
 
