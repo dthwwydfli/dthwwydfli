@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>istiaq :: pixel snake</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    h1 {
+      font-size: 14px;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .crt-wrap {
+      position: relative;
+      border: 2px solid #fff;
+      line-height: 0;
+    }
+
+    .crt-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .crt-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 80%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    canvas {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      display: block;
+      background: #000;
+      width: 90vw;
+      height: auto;
+      max-width: 600px;
+      max-height: 400px;
+    }
+
+    .controls {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #666;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .controls kbd {
+      display: inline-block;
+      border: 1px solid #444;
+      padding: 1px 4px;
+      font-size: 10px;
+      margin: 0 2px;
+    }
+
+    .score-board {
+      margin-top: 8px;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .hidden { display: none; }
+
+    /* Mobile d-pad */
+    .dpad {
+      display: none;
+      margin-top: 16px;
+      width: 150px;
+      height: 150px;
+      position: relative;
+    }
+
+    .dpad-btn {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: #111;
+      border: 1px solid #333;
+      color: #fff;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+
+    .dpad-btn:active { background: #222; }
+
+    .dpad-up    { top: 0; left: 50px; }
+    .dpad-down  { bottom: 0; left: 50px; }
+    .dpad-left  { top: 50px; left: 0; }
+    .dpad-right { top: 50px; right: 0; }
+
+    @media (max-width: 600px) {
+      .dpad { display: block; }
+      canvas { width: 95vw; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>pixel_snake v1.0</h1>
+
+  <div class="crt-wrap">
+    <canvas id="game" width="300" height="200"></canvas>
+  </div>
+
+  <div class="score-board">SCORE: <span id="score">0</span> | HIGH: <span id="high">0</span></div>
+
+  <div class="controls">
+    <kbd>arrows</kbd> to move &nbsp;&bull;&nbsp; <kbd>space</kbd> to restart
+  </div>
+
+  <div class="dpad">
+    <div class="dpad-btn dpad-up" data-dir="up">&#9650;</div>
+    <div class="dpad-btn dpad-down" data-dir="down">&#9660;</div>
+    <div class="dpad-btn dpad-left" data-dir="left">&#9664;</div>
+    <div class="dpad-btn dpad-right" data-dir="right">&#9654;</div>
+  </div>
+
+  <script>
+    (function() {
+      const canvas = document.getElementById('game');
+      const ctx = canvas.getContext('2d');
+
+      const GRID_W = 30;
+      const GRID_H = 20;
+      const CELL = 10; // internal resolution 300x200
+
+      let snake = [];
+      let dir = { x: 1, y: 0 };
+      let nextDir = { x: 1, y: 0 };
+      let food = { x: 0, y: 0 };
+      let score = 0;
+      let highScore = parseInt(localStorage.getItem('pixelSnakeHigh') || '0', 10);
+      let loopId = null;
+      let speed = 120;
+      let isGameOver = false;
+      let blink = 0; // blink counter for food
+
+      const scoreEl = document.getElementById('score');
+      const highEl = document.getElementById('high');
+      highEl.textContent = String(highScore);
+
+      function wrapCoord(v, max) {
+        if (v < 0) return max - 1;
+        if (v >= max) return 0;
+        return v;
+      }
+
+      function init() {
+        snake = [
+          { x: 5, y: 10 },
+          { x: 4, y: 10 },
+          { x: 3, y: 10 }
+        ];
+        dir = { x: 1, y: 0 };
+        nextDir = { x: 1, y: 0 };
+        score = 0;
+        speed = 120;
+        isGameOver = false;
+        scoreEl.textContent = '0';
+        placeFood();
+        if (loopId) clearInterval(loopId);
+        loopId = setInterval(gameLoop, speed);
+      }
+
+      function placeFood() {
+        let ok = false;
+        while (!ok) {
+          food = {
+            x: Math.floor(Math.random() * GRID_W),
+            y: Math.floor(Math.random() * GRID_H)
+          };
+          ok = !snake.some(s => s.x === food.x && s.y === food.y);
+        }
+      }
+
+      function gameLoop() {
+        if (isGameOver) return;
+        blink++;
+
+        dir = nextDir;
+        const head = {
+          x: wrapCoord(snake[0].x + dir.x, GRID_W),
+          y: wrapCoord(snake[0].y + dir.y, GRID_H)
+        };
+
+        // self collision
+        if (snake.some(s => s.x === head.x && s.y === head.y)) {
+          gameOver();
+          return;
+        }
+
+        snake.unshift(head);
+
+        // eat
+        if (head.x === food.x && head.y === food.y) {
+          score += 10;
+          scoreEl.textContent = String(score);
+          if (score > highScore) {
+            highScore = score;
+            highEl.textContent = String(highScore);
+            localStorage.setItem('pixelSnakeHigh', String(highScore));
+          }
+          placeFood();
+          if (speed > 55) {
+            speed -= 3;
+            clearInterval(loopId);
+            loopId = setInterval(gameLoop, speed);
+          }
+        } else {
+          snake.pop();
+        }
+
+        draw();
+      }
+
+      function draw() {
+        // bg
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // grid lines (subtle)
+        ctx.strokeStyle = '#0a0a0a';
+        ctx.lineWidth = 1;
+        for (let x = 0; x <= GRID_W; x++) {
+          ctx.beginPath();
+          ctx.moveTo(x * CELL, 0);
+          ctx.lineTo(x * CELL, canvas.height);
+          ctx.stroke();
+        }
+        for (let y = 0; y <= GRID_H; y++) {
+          ctx.beginPath();
+          ctx.moveTo(0, y * CELL);
+          ctx.lineTo(canvas.width, y * CELL);
+          ctx.stroke();
+        }
+
+        // food (blinking cross or block)
+        ctx.fillStyle = (blink % 6 < 3) ? '#fff' : '#888';
+        const fx = food.x * CELL;
+        const fy = food.y * CELL;
+        ctx.fillRect(fx + 3, fy + 1, 4, 8);
+        ctx.fillRect(fx + 1, fy + 3, 8, 4);
+
+        // snake
+        snake.forEach((seg, i) => {
+          ctx.fillStyle = i === 0 ? '#fff' : '#aaa';
+          ctx.fillRect(seg.x * CELL + 1, seg.y * CELL + 1, CELL - 2, CELL - 2);
+        });
+
+        // score in canvas for screenshots
+        ctx.fillStyle = '#fff';
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText('SCORE ' + score, 5, 10);
+      }
+
+      function gameOver() {
+        isGameOver = true;
+        clearInterval(loopId);
+
+        // flash effect
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        setTimeout(() => {
+          ctx.fillStyle = '#000';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.fillStyle = '#fff';
+          ctx.font = 'bold 20px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 10);
+
+          ctx.font = '10px monospace';
+          ctx.fillText('PRESS SPACE TO RESTART', canvas.width / 2, canvas.height / 2 + 15);
+
+          ctx.textAlign = 'left';
+        }, 60);
+      }
+
+      document.addEventListener('keydown', (e) => {
+        switch (e.key) {
+          case 'ArrowUp':
+          case 'w':
+          case 'W':
+            if (dir.y === 0) nextDir = { x: 0, y: -1 };
+            e.preventDefault();
+            break;
+          case 'ArrowDown':
+          case 's':
+          case 'S':
+            if (dir.y === 0) nextDir = { x: 0, y: 1 };
+            e.preventDefault();
+            break;
+          case 'ArrowLeft':
+          case 'a':
+          case 'A':
+            if (dir.x === 0) nextDir = { x: -1, y: 0 };
+            e.preventDefault();
+            break;
+          case 'ArrowRight':
+          case 'd':
+          case 'D':
+            if (dir.x === 0) nextDir = { x: 1, y: 0 };
+            e.preventDefault();
+            break;
+          case ' ':
+          case 'Enter':
+            e.preventDefault();
+            init();
+            break;
+        }
+      });
+
+      // Mobile d-pad
+      document.querySelectorAll('.dpad-btn').forEach(btn => {
+        btn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          const d = btn.dataset.dir;
+          if (d === 'up' && dir.y === 0) nextDir = { x: 0, y: -1 };
+          if (d === 'down' && dir.y === 0) nextDir = { x: 0, y: 1 };
+          if (d === 'left' && dir.x === 0) nextDir = { x: -1, y: 0 };
+          if (d === 'right' && dir.x === 0) nextDir = { x: 1, y: 0 };
+        });
+        btn.addEventListener('mousedown', (e) => {
+          const d = btn.dataset.dir;
+          if (d === 'up' && dir.y === 0) nextDir = { x: 0, y: -1 };
+          if (d === 'down' && dir.y === 0) nextDir = { x: 0, y: 1 };
+          if (d === 'left' && dir.x === 0) nextDir = { x: -1, y: 0 };
+          if (d === 'right' && dir.x === 0) nextDir = { x: 1, y: 0 };
+        });
+      });
+
+      init();
+    })();
+  </script>
+</body>
+</html>
