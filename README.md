@@ -33,11 +33,6 @@
 </div>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Harvard%20University-visited-black?style=flat-square&labelColor=000000&color=000000" alt="Harvard University" />
-  <img src="https://img.shields.io/badge/University%20of%20Oxford-visited-black?style=flat-square&labelColor=000000&color=000000" alt="Oxford University" />
-</div>
-
-<div align="center">
   <img src="https://img.shields.io/badge/python-black?style=flat-square&logo=python&logoColor=white&labelColor=000000&color=000000" alt="Python" />
   <img src="https://img.shields.io/badge/typescript-black?style=flat-square&logo=typescript&logoColor=white&labelColor=000000&color=000000" alt="TypeScript" />
   <img src="https://img.shields.io/badge/dart-black?style=flat-square&logo=dart&logoColor=white&labelColor=000000&color=000000" alt="Dart" />
@@ -47,11 +42,16 @@
 
 <div align="center">
   <a href="https://github.com/dthwwydfli/HackHarvard">
-    <img src="https://img.shields.io/badge/%F0%9F%8F%86%20HackHarvard-2026-black?style=for-the-badge&labelColor=000000&color=000000" alt="HackHarvard 2026" />
+    <img src="https://raw.githubusercontent.com/dthwwydfli/dthwwydfli/main/assets/harvard-logo.png" height="60" alt="Harvard" />
   </a>
+  <a href="https://github.com/dthwwydfli/HackHarvard"><b>HackHarvard 2026</b></a>
   <a href="https://github.com/potatoesandfrenchfries/swarm-chaser">
-    <img src="https://img.shields.io/badge/%F0%9F%8F%86%20OxHack-2026-black?style=for-the-badge&labelColor=000000&color=000000" alt="OxHack 2026" />
+    <img src="https://raw.githubusercontent.com/dthwwydfli/dthwwydfli/main/assets/oxford-logo.png" height="60" alt="Oxford" />
   </a>
+  <a href="https://github.com/potatoesandfrenchfries/swarm-chaser"><b>OxHack 2026</b></a>
+</div>
+
+<div align="center">
   <img src="https://img.shields.io/badge/ZAI-Winner-black?style=for-the-badge&labelColor=000000&color=000000" alt="ZAI" />
   <a href="https://github.com/dthwwydfli/rare-build-hackathon">
     <img src="https://img.shields.io/badge/Rare%20Build-Hackathon-black?style=for-the-badge&labelColor=000000&color=000000" alt="Rare Build" />
@@ -59,19 +59,6 @@
   <a href="https://github.com/persistentepiphany/preventine_healthcare_hackathon">
     <img src="https://img.shields.io/badge/Preventine-Healthcare-black?style=for-the-badge&labelColor=000000&color=000000" alt="Preventine" />
   </a>
-</div>
-
-<div align="center">
-
-|  |  |
-|---|---|
-| <a href="https://github.com/dthwwydfli/HackHarvard"><b>TouchGrass</b></a> | <a href="https://github.com/potatoesandfrenchfries/swarm-chaser"><b>Swarm Chaser</b></a> |
-| **HackHarvard 2026** - Chrome extension that tracks environmental impact of AI usage | **OxHack 2026** - AI agent security monitor with black-box &amp; white-box detection |
-| `typescript` `factory` `daytona` `chalk` | `python` `machine learning` `ai safety` |
-| <a href="https://github.com/persistentepiphany/preventine_healthcare_hackathon"><b>Preventine</b></a> | <a href="https://github.com/dthwwydfli/rare-build-hackathon"><b>Rare Build</b></a> |
-| **Healthcare hackathon** project | **Hackathon** submission |
-| `typescript` | `dart` |
-
 </div>
 
 <div align="center">
@@ -95,18 +82,6 @@
 
 <div align="center">
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=dthwwydfli&background=000000&ring=FFFFFF&fire=FFFFFF&currStreakNum=FFFFFF&sideNums=FFFFFF&currStreakLabel=FFFFFF&sideLabels=FFFFFF&dates=FFFFFF&hide_border=true" />
-</div>
-
-<div align="center">
-
-| Project | Description | Stack |
-|---------|-------------|-------|
-| [TouchGrass](https://github.com/dthwwydfli/HackHarvard) | Chrome extension for AI carbon tracking. Built at Harvard. | `typescript` |
-| [Swarm Chaser](https://github.com/potatoesandfrenchfries/swarm-chaser) | AI agent security monitor. Built at Oxford. | `python` |
-| [Karpathy Method Claude](https://github.com/dthwwydfli/karpathy-method-claude) | 3-layer AI coding framework for Claude, Cursor &amp; assistants. | `python` |
-| [Preventine](https://github.com/persistentepiphany/preventine_healthcare_hackathon) | Healthcare hackathon project. | `typescript` |
-| [Rare Build](https://github.com/dthwwydfli/rare-build-hackathon) | Hackathon submission. | `dart` |
-
 </div>
 
 <div align="center">
